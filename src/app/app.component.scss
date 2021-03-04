@@ -1,0 +1,27 @@
+@mixin toolbar-font-style {
+  color: white;
+  font-weight: 600;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  background-color: #1976d2;
+  @include toolbar-font-style;
+}
+
+.content {
+  position: absolute;
+  width: calc(100vw - 32px);
+  height: calc(100vh - 92px);
+  margin: 60px auto 0;
+  padding: 16px;
+  overflow: hidden;
+  background-color: plum;
+}
