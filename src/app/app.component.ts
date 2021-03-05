@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  currentLanguage: string = '';
+  fallbackLanguage: string = 'fr-fr';
+
   title: string = 'Puissance 4';
 
   playerYellow: number = 1;
@@ -28,6 +31,8 @@ export class AppComponent {
   }
 
   initValues() {
+    this.currentLanguage = window?.navigator?.language || this.fallbackLanguage;
+
     this.board = new Array();
     for (let index = 0; index < this.numberColumns; index++) {
       this.board.push(new Array(this.numberRows).fill(0));
@@ -91,9 +96,7 @@ export class AppComponent {
   }
 
   currentPlayer() {
-    return (this.moves.length % 2)
-      ? 'Joueur Rouge'
-      : 'Joueur Jaune';
+    return this.moves.length % 2;
   }
 
   restartGame() {

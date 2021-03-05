@@ -3,12 +3,12 @@
     <span class="title">
       {{ title }}
     </span>
+    <div class="current-player" [ngClass]="{'player-yellow': currentPlayer() == 0, 'player-red': currentPlayer() == 1}">
+      <img class="icon-player" src="assets/svg/hand.svg">
+    </div>
     <button mat-stroked-button (click)="restartGame()">
       RESET
     </button>
-    <span class="infos">
-      Tour : {{currentPlayer()}}
-    </span>
   </div>
   <div class="content" role="main">
     <div class="grid-layout" [style.background-image]="'url(assets/img/board.png)'">

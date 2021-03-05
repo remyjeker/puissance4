@@ -1,6 +1,7 @@
 /* scss variables */
 $tablet-up-width: 800px;
 $base-padding: 16px;
+$player-icon-size: 20px;
 $toolbar-height: 60px;
 $grid-ratio: 0.8333;
 
@@ -31,6 +32,19 @@ $dark-color: #232121;
   animation: bouncyDrop 1s;
 }
 
+@mixin rounded {
+  border-radius: 50%;
+}
+
+/* reused classes */
+.player-yellow {
+  background-color: $player-yellow-color;
+}
+
+.player-red {
+  background-color: $player-red-color;
+}
+
 /* declarations */
 .view-wrapper {
   position: absolute;
@@ -51,27 +65,33 @@ $dark-color: #232121;
   background-color: $base-toolbar-color;
   @include toolbar-font-style;
 
-  .infos {
-    text-align: right;
+  .current-player {
+    width: #{2 * $player-icon-size};
+    height: #{2 * $player-icon-size};
+    @include rounded;
+    padding: #{$player-icon-size / 2};;
+    box-sizing: border-box;
+
+    .icon-player {
+      width: $player-icon-size;
+      height: $player-icon-size;
+    }
   }
 }
 
 .content {
-  max-height: calc(100vh - #{$toolbar-height});
-  padding: $base-padding;
+  padding: 16px 2vw;
   overflow: hidden;
   box-sizing: border-box;
 
   .grid-layout {
-    min-width: 250px;
-    min-height: calc(0.8333 * 250px);
-    height: calc(0.8333 * (100vw - 32px));
+    width: 100%;
+    height: calc(#{$grid-ratio} * (100vw - (2 * 2vw)));
+    padding: 4.5vw 7.25vw 9.75vw 9.5vw;
 
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-gap: 1vw;
 
-    padding: 4.75vw 8.25vw 9.5vw 9.75vw;
     box-sizing: border-box;
     background-size: cover;
 
@@ -81,9 +101,9 @@ $dark-color: #232121;
       grid-gap: 2vw;
 
       .cell {
-        width: 8.5vw;
-        height: 8.5vw;
-        border-radius: 50%;
+        width: 8.75vw;
+        height: 8.75vw;
+        @include rounded;
         box-sizing: border-box;
         box-shadow: 0 -1vw 0 0 $dark-color inset;
         cursor: pointer;
@@ -91,14 +111,6 @@ $dark-color: #232121;
         &.player-yellow , &.player-red {
           @include animated-token;
           box-shadow: 0 1vw 2vw $dark-color inset;
-        }
-
-        &.player-yellow {
-          background-color: $player-yellow-color;
-        }
-
-        &.player-red {
-          background-color: $player-red-color;
         }
       }
     }
@@ -111,19 +123,20 @@ $dark-color: #232121;
     width: $tablet-up-width;
     max-width: $tablet-up-width;
     margin: 0 auto;
+    padding: $base-padding;
 
     .grid-layout {
       width: #{$tablet-up-width - (2 * $base-padding)};
       height: calc(#{$grid-ratio} * #{$tablet-up-width - (2 * $base-padding)});
-      padding: 38px 66px 76px 78px;
+      padding: 38px 66px 78px 76px;
       grid-gap: 8px;
 
       .column {
         grid-gap: 16px;
 
         .cell {
-          width: 68px;
-          height: 68px;
+          width: 70px;
+          height: 70px;
           box-shadow: 0 -8px 0 0 $dark-color inset;
 
           &.player-yellow , &.player-red {
