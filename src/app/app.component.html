@@ -1,40 +1,25 @@
-<div class="toolbar" role="banner">
-  <span class="title">
-    {{ title }}
-  </span>
-</div>
-<div class="content" role="main">
-  <div class="grid-layout" [style.background-image]="'url(assets/img/board.png)'">
-    <div class="column" *ngFor="let col of columns; index as colIndex">
-      <div class="row" *ngFor="let row of rows; index as rowIndex">
-        <div class="cell" (click)="setToken(colIndex, rowIndex)">
+<div class="view-wrapper">
+  <div class="toolbar" role="banner">
+    <span class="title">
+      {{ title }}
+    </span>
+    <button mat-stroked-button (click)="restartGame()">
+      RESET
+    </button>
+    <span class="infos">
+      Tour : {{currentPlayer()}}
+    </span>
+  </div>
+  <div class="content" role="main">
+    <div class="grid-layout" [style.background-image]="'url(assets/img/board.png)'">
+      <div class="column" *ngFor="let col of columns; index as colIndex">
+        <div class="row" *ngFor="let row of rows; index as rowIndex">
+          <div class="cell" (click)="setToken(colIndex)" [ngClass]="{
+            'player-yellow': board[colIndex][5 - rowIndex] == playerYellow,
+            'player-red': board[colIndex][5 - rowIndex] == playerRed
+          }">
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<style>
-  .grid-layout {
-    height: calc(0.8333 * (100vw - 32px));
-    max-height: calc(0.8333 * 100vh);
-
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-
-    padding: 4vw 8vw 8vw 8vw;
-    box-sizing: border-box;
-    background-size: cover;
-  }
-
-  .column {
-    display: grid;
-    grid-template-rows: repeat(6, 1fr);
-  }
-
-  .cell {
-    width: 10vw;
-    height: 10vw;
-    border: 1px solid red;
-    box-sizing: border-box;
-  }
-</style>
