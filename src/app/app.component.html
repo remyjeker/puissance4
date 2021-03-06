@@ -19,10 +19,7 @@
     <div class="grid-layout" [style.background-image]="'url(assets/img/board.png)'">
       <div class="column" *ngFor="let col of columns; index as colIndex">
         <div class="row" *ngFor="let row of rows; index as rowIndex">
-          <div class="cell" (click)="setToken(colIndex)" [ngClass]="{
-            'player-yellow': board[colIndex][5 - rowIndex] == playerYellow,
-            'player-red': board[colIndex][5 - rowIndex] == playerRed
-          }">
+          <div class="cell" (click)="setToken(colIndex)" [ngClass]="getTokenClass(colIndex, rowIndex)">
         </div>
       </div>
     </div>

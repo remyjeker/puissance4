@@ -21,6 +21,7 @@ export class AppComponent {
 
   playerYellow: number = 1;
   playerRed: number = 2;
+  winning: number = 3;
 
   numberColumns: number = 7;
   numberRows: number = 6;
@@ -93,7 +94,9 @@ export class AppComponent {
   }
 
   showWin(x: number, y: number, dx: number, dy: number) {
-    alert(`WON at position : ${x}, ${y}, ${dx}, ${dy}`);
+    for (var i = 0; i < 4; i++) {
+      this.board[x + i * dx][y + i * dy] = this.winning;
+    }
   }
 
   // template functions
@@ -122,5 +125,15 @@ export class AppComponent {
 
   currentPlayer() {
     return this.moves.length % 2;
+  }
+
+  getTokenClass(col: number, row: number) {
+    const tokenValue = this.board[col][5 - row]
+
+    return {
+      'player-yellow': (tokenValue == this.playerYellow),
+      'player-red': (tokenValue == this.playerRed),
+      'winning': (tokenValue == this.winning)
+    }
   }
 }

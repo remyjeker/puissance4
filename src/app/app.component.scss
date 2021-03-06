@@ -9,6 +9,7 @@ $grid-ratio: 0.8333;
 $base-layout-color: #ffd5ff;
 $base-toolbar-color: #1976d2;
 $player-yellow-color: yellow;
+$winning-color: #424242;
 $player-red-color: red;
 $contrast-color: white;
 $dark-color: #232121;
@@ -81,10 +82,10 @@ $dark-color: #232121;
   .actions {
     button {
       margin-right: 10px;
-    }
 
-    button::first-letter {
-      text-transform: uppercase;
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
 
     :last-child {
@@ -125,6 +126,10 @@ $dark-color: #232121;
         &.player-yellow , &.player-red {
           @include animated-token;
           box-shadow: 0 1vw 2vw $dark-color inset;
+        }
+
+        &.winning {
+          background-color: $winning-color;
         }
       }
     }
