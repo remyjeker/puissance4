@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,14 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en'); 
+  }
+
+  LANG_FR: string = 'fr';
+  LANG_EN: string = 'en';
   currentLanguage: string = '';
-  fallbackLanguage: string = 'fr-fr';
+  targetLanguage: string = '';
 
   title: string = 'Puissance 4';
 
@@ -27,12 +34,17 @@ export class AppComponent {
   won: boolean;
 
   ngOnInit() {
-    this.initValues();
+    this.setLanguage();
+    this.initGameValues();
   }
 
-  initValues() {
-    this.currentLanguage = window?.navigator?.language || this.fallbackLanguage;
+  setLanguage() {
+    const { language } = window?.navigator
+    this.currentLanguage = (language) ? language.split('-')[0] : this.translate.defaultLang
+    this.switchLanguage();
+  }
 
+  initGameValues() {
     this.board = new Array();
     for (let index = 0; index < this.numberColumns; index++) {
       this.board.push(new Array(this.numberRows).fill(0));
@@ -86,6 +98,19 @@ export class AppComponent {
 
   // template functions
 
+  switchLanguage() {
+    this.targetLanguage = this.currentLanguage
+    this.currentLanguage = (this.currentLanguage == this.LANG_FR)
+      ? this.LANG_EN
+      : this.LANG_FR;
+
+    this.translate.use(this.currentLanguage);
+  }
+
+  restartGame() {
+    this.initGameValues();
+  }
+
   setToken(col: number) {
     if (this.canPlay(col)) {
       this.play(col);
@@ -97,9 +122,5 @@ export class AppComponent {
 
   currentPlayer() {
     return this.moves.length % 2;
-  }
-
-  restartGame() {
-    this.initValues();
   }
 }

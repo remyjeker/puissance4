@@ -77,6 +77,20 @@ $dark-color: #232121;
       height: $player-icon-size;
     }
   }
+
+  .actions {
+    button {
+      margin-right: 10px;
+    }
+
+    button::first-letter {
+      text-transform: uppercase;
+    }
+
+    :last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 .content {
