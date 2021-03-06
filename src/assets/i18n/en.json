@@ -1,0 +1,9 @@
+{
+  "buttons": {
+    "reset": "reset"
+  },
+  "targetLanguages": {
+    "fr": "francais",
+    "en": "anglais"
+  }
+}

@@ -25,3 +25,27 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Translation Module
+
+Ways of using translations bindings:
+
+<!-- translation: translation pipe -->
+`<p>{{ 'text' | translate }}</p>`
+
+<!-- translation: directive (key as attribute)-->
+`<p [translate]="'text'"></p>`
+
+<!-- translation: directive (key as content of element) -->
+`<p translate>text</p>`
+
+With parameters: 
+
+<!-- translation with parameters: translation pipe -->
+`<p>{{ 'greeting' | translate:{'name':'John'} }}</p>`
+
+<!-- translation: directive (key as attribute) -->
+`<p [translate]="'greeting'" [translateParams]="{name: 'John'}"></p>`
+
+<!-- translation: directive (key as content of element)-->
+`<p translate [translateParams]="{name: 'John'}">greeting</p>`

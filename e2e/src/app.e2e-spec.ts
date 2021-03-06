@@ -8,9 +8,11 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', async () => {
+  it('should display title', async () => {
+    const expectedTitle = 'Puissance 4';
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('puissance4 app is running!');
+    const pageTitle = await page.getTitleText()
+    expect(pageTitle).toEqual(expectedTitle);
   });
 
   afterEach(async () => {
