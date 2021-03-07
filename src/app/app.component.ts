@@ -33,6 +33,7 @@ export class AppComponent {
   height: Array<number>;
   moves: Array<number>;
   won: boolean;
+  winningPlayerLocalizedColor: string;
 
   ngOnInit() {
     this.setLanguage();
@@ -42,7 +43,7 @@ export class AppComponent {
   setLanguage() {
     const { language } = window?.navigator
     this.currentLanguage = (language) ? language.split('-')[0] : this.translate.defaultLang
-    this.switchLanguage();
+    this.switchLanguage(this.currentLanguage);
   }
 
   initGameValues() {
@@ -53,6 +54,7 @@ export class AppComponent {
     this.height = new Array(this.numberColumns).fill(0);
     this.moves = new Array();
     this.won = false;
+    this.winningPlayerLocalizedColor = '';
   }
 
   canPlay(col: number) {
@@ -73,7 +75,6 @@ export class AppComponent {
   
     if (y >= 3 && this.board[x][y - 3] == this.board[x][y] && this.board[x][y - 2] == this.board[x][y] && this.board[x][y - 1] == this.board[x][y]) {
       this.showWin(x, y, 0, -1);
-      this.won = true;
       return;
     }
 
@@ -87,7 +88,6 @@ export class AppComponent {
         else break;
       if (nb >= 3) {
         this.showWin(x + dx + 1, y + (dx + 1) * dy, 1, dy);
-        this.won = true;
         return;
       }
     }
@@ -97,15 +97,20 @@ export class AppComponent {
     for (var i = 0; i < 4; i++) {
       this.board[x + i * dx][y + i * dy] = this.winning;
     }
+    this.winningPlayerLocalizedColor = this.translate.instant(`players.${this.getWinningPlayerColor()}`);
+    this.won = true;
   }
 
   // template functions
 
-  switchLanguage() {
+  switchLanguage(lang: string = 'reverse') {
     this.targetLanguage = this.currentLanguage
-    this.currentLanguage = (this.currentLanguage == this.LANG_FR)
-      ? this.LANG_EN
-      : this.LANG_FR;
+
+    if (lang == 'reverse') {
+      this.currentLanguage = (this.currentLanguage == this.LANG_FR)
+        ? this.LANG_EN
+        : this.LANG_FR;
+    }
 
     this.translate.use(this.currentLanguage);
   }
@@ -118,13 +123,25 @@ export class AppComponent {
     if (this.canPlay(col)) {
       this.play(col);
     } else {
-      if (this.won) alert('Play again ?');
-      else alert('Play in another column ;)');
+      alert(this.translate.instant('indications.playInAnotherColumn'));
     }
   }
 
-  currentPlayer() {
-    return this.moves.length % 2;
+  getCurrentPlayerClass() {
+    const currentPlayer = this.moves.length % 2;
+
+    return {
+      'player-yellow': (currentPlayer == 0),
+      'player-red': (currentPlayer == 1)
+    }
+  }
+
+  getWinningPlayerColor() {
+    const winningPlayerIndex = this.moves[this.moves.length - 1] % 2;
+
+    return (winningPlayerIndex === 0)
+      ? 'yellow'
+      : 'red';
   }
 
   getTokenClass(col: number, row: number) {

@@ -3,7 +3,7 @@
     <span class="title">
       {{ title }}
     </span>
-    <div class="current-player" [ngClass]="{'player-yellow': currentPlayer() == 0, 'player-red': currentPlayer() == 1}">
+    <div class="current-player" [ngClass]="getCurrentPlayerClass()">
       <img class="icon-player" src="assets/svg/hand.svg">
     </div>
     <div class="actions">
@@ -23,5 +23,26 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="won" class="splash-container">
+  <div class="splash">
+    <div class="message">
+      {{ 'texts.playerWon' | translate: { 'player': winningPlayerLocalizedColor } }}
+    </div>
+    <div class="svg">
+      <svg>
+        <rect [ngClass]="getWinningPlayerColor()" />
+      </svg>
+    </div>
+  </div>
+  <div class="game-end">
+    <p>
+      {{ 'texts.playAgain' | translate }}
+    </p>
+    <button mat-stroked-button (click)="restartGame()">
+      {{ 'buttons.go' | translate }}
+    </button>
   </div>
 </div>
