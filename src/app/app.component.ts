@@ -33,7 +33,7 @@ export class AppComponent {
   height: Array<number>;
   moves: Array<number>;
   won: boolean;
-  winningPlayerLocalizedColor: string;
+  winningPlayerColor: string;
 
   ngOnInit() {
     this.setLanguage();
@@ -53,8 +53,8 @@ export class AppComponent {
     }
     this.height = new Array(this.numberColumns).fill(0);
     this.moves = new Array();
+    this.winningPlayerColor = '';
     this.won = false;
-    this.winningPlayerLocalizedColor = '';
   }
 
   canPlay(col: number) {
@@ -97,7 +97,7 @@ export class AppComponent {
     for (var i = 0; i < 4; i++) {
       this.board[x + i * dx][y + i * dy] = this.winning;
     }
-    this.winningPlayerLocalizedColor = this.translate.instant(`players.${this.getWinningPlayerColor()}`);
+    this.winningPlayerColor = this.getWinningPlayerColor();
     this.won = true;
   }
 
@@ -137,9 +137,10 @@ export class AppComponent {
   }
 
   getWinningPlayerColor() {
-    const winningPlayerIndex = this.moves[this.moves.length - 1] % 2;
+    const lastMoveIndex = this.moves.length - 1;
+    const lastPlayerIndex = lastMoveIndex % 2;
 
-    return (winningPlayerIndex === 0)
+    return (lastPlayerIndex == 0)
       ? 'yellow'
       : 'red';
   }
