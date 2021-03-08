@@ -1,9 +1,21 @@
 {
   "buttons": {
-    "reset": "reset"
+    "reset": "reset",
+    "go": "go !"
   },
   "targetLanguages": {
     "fr": "francais",
     "en": "anglais"
+  },
+  "texts": {
+    "playerWon": "{{ player }} won !",
+    "playAgain": "want a revenge ?"
+  },
+  "players": {
+    "yellow": "yellow",
+    "red": "red"
+  },
+  "indications": {
+    "playInAnotherColumn": "Please, play in another column !"
   }
 }

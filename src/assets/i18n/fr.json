@@ -1,9 +1,21 @@
 {
   "buttons": {
-    "reset": "réinitialiser"
+    "reset": "réinitialiser",
+    "go": "allez !"
   },
   "targetLanguages": {
     "fr": "french",
     "en": "english"
+  },
+  "texts": {
+    "playerWon": "{{ player }} à gagné !",
+    "playAgain": "encore une dernière ?"
+  },
+  "players": {
+    "yellow": "jaune",
+    "red": "rouge"
+  },
+  "indications": {
+    "playInAnotherColumn": "Veuillez jouer dans une autre colonne !"
   }
 }

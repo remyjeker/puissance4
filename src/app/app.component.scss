@@ -6,7 +6,7 @@ $toolbar-height: 60px;
 $grid-ratio: 0.8333;
 
 /* scss colors */
-$base-layout-color: #ffd5ff;
+$base-layout-color: #cecece;
 $base-toolbar-color: #1976d2;
 $player-yellow-color: yellow;
 $winning-color: #424242;
@@ -80,6 +80,8 @@ $dark-color: #232121;
   }
 
   .actions {
+    display: flex;
+
     button {
       margin-right: 10px;
 

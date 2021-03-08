@@ -3,7 +3,7 @@
     <span class="title">
       {{ title }}
     </span>
-    <div class="current-player" [ngClass]="{'player-yellow': currentPlayer() == 0, 'player-red': currentPlayer() == 1}">
+    <div class="current-player" [ngClass]="getCurrentPlayerClass()">
       <img class="icon-player" src="assets/svg/hand.svg">
     </div>
     <div class="actions">
@@ -25,3 +25,4 @@
     </div>
   </div>
 </div>
+<splash *ngIf="won" [playerColor]="winningPlayerColor" (restartGameHandler)="restartGame()">
