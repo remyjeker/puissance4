@@ -1,11 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('AppComponent', () => {
   const appTitle = 'Puissance 4';
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        TranslateModule.forRoot()
+      ],
       declarations: [
         AppComponent
       ],
